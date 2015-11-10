@@ -1,5 +1,13 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+  div(aurelia-app='js/main')
+    div .splash
+	div .message InfoApp starting...
+        i .fa .fa-spinner .fa-spin'
+    script(src="/javascripts/lie/lie.polyfill.min.js")
+    script(src="/javascripts/pouchdb/pouchdb-5.1.0.min.js")
+    script(src="/javascripts/pouchdb/pouchdb.find.js")
+    script(src='/javascripts/papaparse/papaparse.js')
+    script(src="/javascripts/core-js/client/core.js")
+    script(src="/javascripts/webcomponentsjs/webcomponents.js")
+    script(src="/javascripts/requirejs/require.js",data-main="main-init")

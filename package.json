@@ -14,5 +14,15 @@
     "less-middleware": "1.0.x",
     "morgan": "~1.5.3",
     "serve-favicon": "~2.2.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "del": "*",
+    "gulp": "*",
+    "gulp-changed": "*",
+    "gulp-typescript": "*",
+    "merge2": "*",
+    "run-sequence": "*",
+    "typescript": "Microsoft\/TypeScript"
   }
 }

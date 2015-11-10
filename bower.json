@@ -1,13 +1,17 @@
 {
-    "name": "nbinfoapp",
-    "version": "1.0.0",
-    "main": "path/to/main.css",
-    "ignore": [
-        ".jshintrc",
-        "**/*.txt"
-    ],
-    "dependencies": {
-    },
-    "devDependencies": {
-    }
+  "name": "nbinfoapp",
+  "version": "1.0.0",
+  "main": "path/to/main.css",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "lie": "~3.0.1",
+    "pouchdb": "~5.1.0",
+    "requirejs": "~2.1.20",
+    "qunit": "~1.19.0",
+    "pouchdb-find": "0.6.0"
+  },
+  "devDependencies": {}
 }

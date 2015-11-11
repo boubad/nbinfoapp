@@ -1,0 +1,104 @@
+<template>
+	<div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<sheader-bar></sheader-bar>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<form role="form">
+						<table if.bind="is_connected">
+							<tr>
+								<td>
+									<div class="form-group">
+										<label class="form-label" for="departements">Dép.</label>
+										<select id="departements" value.bind="departement">
+											<option>Dep?...</option>
+											<option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<label class="form-label" for="annees">Année</label>
+										<select id="annees" value.bind="annee">
+											<option>Année?...</option>
+											<option repeat.for="anelem of annees" model.bind="anelem">${anelem.text}</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<label class="form-label" for="semestres">Sem.</label>
+										<select id="semestres" value.bind="semestre">
+											<option>Semestre?...</option>
+											<option repeat.for="semelem of semestres" model.bind="semelem">${semelem.text}</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<label class="form-label" for="unites">Unité</label>
+										<select id="unites" value.bind="unite">
+											<option>Unité?...</option>
+											<option repeat.for="unelem of unites" model.bind="unelem">${unelem.text}</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<div class="form-group">
+										<label class="form-label" for="matieres">Matière</label>
+										<select id="matieres" value.bind="matiere">
+											<option>Matière?...</option>
+											<option repeat.for="matelem of matieres" model.bind="matelem">${matelem.text}</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pagination-bar></pagination-bar>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table id="link-table">
+						<tr>
+							<th></th>
+							<th>Nom de famille</th>
+							<th>Prénom(s)</th>
+							<th>Groupe</th>
+							<th>Note</th>
+						</tr>
+						<tr repeat.for="note of items">
+							<td>
+								<div if.bind="note.has_url">
+									<img src.bind="note.url" height="32"></img>
+								</div>
+							</td>
+							<td>
+								<a route-href="route: etud; params.bind: { id: note.etudiantid }">${note.lastname}</a>
+							</td>
+							<td>
+								${note.firstname}
+							</td>
+							<td>
+								${note.groupeSigle}
+							</td>
+							<td>
+								${note.note}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</template>

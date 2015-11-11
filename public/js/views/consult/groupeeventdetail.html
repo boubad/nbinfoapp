@@ -1,0 +1,133 @@
+<template>
+  <div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align:center">
+            <sheader-bar></sheader-bar>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align:top">
+            <form role="form">
+              <div class="form-group">
+                <label class="form-label" for="departemnt">Département</label>
+                <input class="form-control" type="text" id="departement" value.bind="departementName" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="annee">Année universitaire</label>
+                <input class="form-control" type="text" id="annee" value.bind="anneeName" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="semestre">Semestre</label>
+                <input class="form-control" type="text" id="semestre" value.bind="semestreName" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="matiere">Matière</label>
+                <input class="form-control" type="tel" id="matiere" value.bind="matiereName" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="groupe">Groupe</label>
+                <input class="form-control" type="tel" id="groupe" value.bind="groupeName" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="devoir">Contrôle</label>
+                <input class="form-control" type="text" id="devoir" value.bind="name" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="eventDate">Date</label>
+                <input class="form-control" type="date" id="eventDate" value.bind="eventDate" min.bind="minDate" max.bind="maxDate" required></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="coef">Coefficient</label>
+                <input class="form-control" type="text" id="coef" value.bind="coefficient" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" value.bind="location" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="startTime">Heure début</label>
+                <input class="form-control" type="text" id="startTime" value.bind="startTime" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="endTime">Heure fin</label>
+                <input class="form-control" type="text" id="endTime" value.bind="endTime" readonly></input>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" id="description" value.bind="description" readonly></textarea>
+              </div>
+            </form>
+          </td>
+          <td style="vertical-align:top">
+            <table id="link-table">
+              <tr>
+                <th></th>
+                <th></th>
+                <th>Nom de famille</th>
+                <th>Prénom(s)</th>
+                <th>Genre</th>
+                <th>Obs.</th>
+              </tr>
+              <tr repeat.for="evt of evts">
+                <td>
+                  <a route-href="route: etudevt; params.bind: { id: evt.id }">
+                      <i class="fa fa-pencil fa-fw"></i></a>
+                </td>
+                <td>
+                  <div if.bind="evt.has_url">
+                    <img src.bind="evt.url" height="32"></img>
+                  </div>
+                </td>
+                <td>
+                  <a route-href="route: etud; params.bind: { id: evt.etudiantid }">${evt.lastname}</a>
+                </td>
+                <td>
+                  ${evt.firstname}
+                </td>
+                <td>
+                  ${evt.genre}
+                </td>
+                <td>
+                  ${evt.description}
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td style="vertical-align:top">
+            <table id="link-table">
+              <tr>
+                <th></th>
+                <th>Nom de famille</th>
+                <th>Prénom(s)</th>
+                <th>Note</th>
+								 <th>Obs.</th>
+              </tr>
+              <tr repeat.for="note of notes">
+                <td>
+                  <div if.bind="note.has_url">
+                    <img src.bind="note.url" height="32"></img>
+                  </div>
+                </td>
+                <td>
+                  <a route-href="route: etud; params.bind: { id: note.etudiantid }">${note.lastname}</a>
+                </td>
+                <td>
+                  ${note.firstname}
+                </td>
+                <td>
+                  ${note.note}
+                </td>
+								<td>
+                  ${note.description}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

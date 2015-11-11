@@ -1,0 +1,31 @@
+<template>
+  <table if.bind="hasPages">
+    <tr>
+      <td style="text-align:center">
+        <ul class="pagination">
+          <li show.bind="canPrevPage">
+            <a href="#" click.delegate="firstPage()">
+              <i class="fa fa-fast-backward fa-fw"></i>DÃ©but</a>
+          </li>
+          <li show.bind="canPrevPage">
+            <a href="#" click.delegate="prevPage()">
+              <i class="fa fa-step-backward fa-fw"></i>PrÃ©c.</a>
+          </li>
+          <li show.bind="canNextPage">
+            <a href="#" click.delegate="nextPage()">
+              <i class="fa fa-step-forward fa-fw"></i>Suivant</a>
+          </li>
+          <li show.bind="canNextPage">
+            <a href="#" click.delegate="lastPage()">
+              <i class="fa fa-fast-forward fa-fw"></i>Fin</a>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-success" style="text-align:center">
+        <strong>${pageStatus}</strong>
+      </td>
+    </tr>
+  </table>
+</template>

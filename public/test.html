@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>InfoApp Tests</title>
+	<link rel="stylesheet" type="text/css" href="javascripts/qunit/qunit.css">
+</head>
+
+<body>
+	<div id="qunit" />
+	<div id="qunit-fixture" />
+	<script src="javascripts/lie/lie.polyfill.min.js"></script>
+	<script src="javascripts/pouchdb/pouchdb-5.1.0.min.js"></script>
+	<script src="javascripts/pouchdb/pouchdb.find.js"></script>
+	<script src='javascripts/papaparse/papaparse.js'></script>
+	<script src="javascripts/requirejs/require.js"></script>
+	<script>
+		var origin = window.location.origin;
+        var pathname = window.location.pathname;
+        var baseUrl = origin + pathname.toLowerCase().replace("test.html", "");
+      require.config({
+        baseUrl: baseUrl,
+        paths: {
+            QUnit: baseUrl + "javascripts/qunit/qunit",
+		pouchdb: baseUrl + "javascripts/pouchdb/pouchdb-5.1.0.min",
+		pouchdbfind: baseUrl + "javascripts/pouchdb/pouchdb.find",
+		papaparse: baseUrl + "javascripts/papaparse/papaparse",
+		data: baseUrl + "js/data",
+            views: baseUrl + "js/views",
+            test: baseUrl + "js/test"
+        },
+        shim: {
+          "QUnit": {
+            exports: "QUnit",
+            init: function() {
+              QUnit.config.autoload = false;
+              QUnit.config.autostart = false;
+            }
+          },
+            "pouchdb": {
+                exports: "PouchDB"
+            },
+		"pouchdbfind": {
+			deps: ['pouchdb']
+		},
+		"papaparse": {
+			exports: "Papa"
+		}
+        }
+      });
+      require(["QUnit","pouchdbfind","test/maintest"],function(QUnit,PouchDB,mytest){
+           mytest.main.run();
+           QUnit.load();
+           QUnit.start();
+      });
+	</script>
+</body>
+
+</html>

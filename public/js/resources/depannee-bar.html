@@ -1,0 +1,22 @@
+<template>
+  <table>
+    <tr>
+      <td>
+        <div class="form-group">
+          <label class="form-label" for="departements">Dep.</label>
+          <select id="departements" value.bind="departement">
+            <option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <div class="form-group">
+          <label class="form-label" for="annees">Année</label>
+          <select id="annees" value.bind="annee">
+            <option repeat.for="anelem of annees" model.bind="anelem">${anelem.text}</option>
+          </select>
+        </div>
+      </td>
+    </tr>
+  </table>
+</template>

@@ -1,0 +1,75 @@
+<template>
+	<connect-bar info.bind="userInfo"></connect-bar>
+	<div class="container">
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<sheader-bar></sheader-bar>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<table>
+						<tr>
+							<td>
+								<div class="form-group">
+									<label class="form-label" for="departements">Dep.</label>
+									<select id="departements" value.bind="departement">
+										<option>Departement...</option>
+										<option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<label class="form-label" for="unites">Unité</label>
+									<select id="unites" value.bind="unite">
+										<option>Unité...</option>
+										<option repeat.for="unelem of unites" model.bind="unelem">${unelem.text}</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr if.bind="canShowForm">
+				<td style="vertical-align:top">
+					<elements-bar></elements-bar>
+				</td>
+				<td>&nbsp;&nbsp;</td>
+				<td style="vertical-align:top">
+					<form role="form">
+						<avatar-bar></avatar-bar>
+						<div class="form-group">
+							<label class="form-label" for="genre">Genre</label>
+							<select class="form-control" id="genre" value.bind="genre" disabled.bind="isReadOnly">
+								<option value="PRATIQUE">Pratique</option>
+								<option value="THEORIE">Théorie</option>
+								<option value="AUTRE">Autre</option>
+							</select>
+						</div>
+						<siglename-bar></siglename-bar>
+						<div class="form-group">
+							<label class="form-label" for="mat_module">Module</label>
+							<input class="form-control" type="text" id="mat_module" value.bind="mat_module" placeholder="Module" disabled.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="coefficient">Coefficient</label>
+							<input class="form-control" type="text" id="coefficient" value.bind="coefficient" placeholder="Coefficient" disabled.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ecs">ECS</label>
+							<input class="form-control" type="text" id="ecs" value.bind="ecs" placeholder="ECS" disabled.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="order">Ordre</label>
+							<input class="form-control" type="text" id="order" value.bind="order" placeholder="Ordre" disabled.bind="isReadOnly"></input>
+						</div>
+						<command-bar></command-bar>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</template>

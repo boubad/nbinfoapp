@@ -1,0 +1,54 @@
+<template>
+  <div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+    <table>
+      <tr>
+        <td style="text-align:center">
+          <sheader-bar></sheader-bar>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:center">
+          <work-bar></work-bar>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <pagination-bar></pagination-bar>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id="link-table">
+            <tr>
+              <th></th>
+              <th>Nom de famille</th>
+              <th>Prénom(s)</th>
+              <th>Groupe</th>
+              <th>Abs.</th>
+              <th>Ret.</th>
+              <th>Autres</th>
+              <th>Observations</th>
+            </tr>
+            <tr repeat.for="note of items">
+              <td>
+                <div if.bind="note.has_url">
+                  <img src.bind="note.url" height="32"></img>
+                </div>
+              </td>
+              <td>
+                <a route-href="route: etud; params.bind: { id: note.etudiantid }">${note.lastname}</a>
+              </td>
+              <td>${note.firstname}</td>
+              <td>${note.groupeSigle}</td>
+              <td>${note.absenceString}</td>
+              <td>${note.retardString}</td>
+              <td>${note.miscString}</td>
+              <td>${note.description}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

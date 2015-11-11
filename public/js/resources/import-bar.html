@@ -1,0 +1,14 @@
+<template>
+  <div if.bind="isEditable">
+    <table if.bind="canImport">
+      <tr>
+        <td style="align-text:center">
+          <div class="form-group">
+            <label class="form-label" for="fileToUpload">Import CSV</label>
+            <input type="file" id="fileToUpload"  change.delegate="importFileChanged($event)"></input>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

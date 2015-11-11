@@ -1,0 +1,36 @@
+<template>
+  <div class="form-group" if.bind="isEditable">
+    <a class="btn btn-primary" show.bind="isEditItem"  click.delegate="reset_password()" href="#">
+      <i class="fa fa-lock fa-fw"></i>Réinitialiser mot de passe
+    </a>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="username">Identifiant</label>
+    <input class="form-control" type="text" id="username" value.bind="username"
+		 placeholder="Identifiant" disabled.bind="isEditItem" readonly.bind="isEditItem" ></input>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="lastname">Nom de famille</label>
+    <input class="form-control" type="text" id="lastname" value.bind="lastname" placeholder="Nom de famille" disabled.bind="isReadOnly" readonly.bind="isReadOnly"></input>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="firstname">Prénom(s)</label>
+    <input class="form-control" type="text" id="firstname" value.bind="firstname" placeholder="Prénom(s)" disabled.bind="isReadOnly" readonly.bind="isReadOnly"></input>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="email">Courriel</label>
+    <input class="form-control" type="email" id="email" value.bind="email" placeholder="Courriel" disabled.bind="isReadOnly" readonly.bind="isReadOnly"></input>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="phone">Téléphone</label>
+    <input class="form-control" type="tel" id="phone" value.bind="phone" placeholder="Téléphone" disabled.bind="isReadOnly" readonly.bind="isReadOnly"></input>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="description">Remarques</label>
+    <textarea class="form-control" id="description" readonly.bind="isReadOnly" disabled.bind="isReadOnly" value.bind="description"></textarea>
+  </div>
+	<div class="form-group">
+    <label class="form-label" for="status">Status</label>
+    <input type="text" class="form-control" id="status" readonly.bind="isReadOnly" disabled.bind="isReadOnly" value.bind="status"></textarea>
+  </div>
+</template>

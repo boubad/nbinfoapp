@@ -1,0 +1,63 @@
+<template>
+	<connect-bar info.bind="userInfo"></connect-bar>
+	<div class="container">
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<sheader-bar></sheader-bar>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<depart-bar></depart-bar>
+				</td>
+			</tr>
+			<tr if.bind="canShowForm">
+				<td style="vertical-align:top">
+					<elements-bar></elements-bar>
+				</td>
+				<td>&nbsp;&nbsp;</td>
+				<td style="vertical-align:top">
+					<form role="form">
+						<avatar-bar></avatar-bar>
+						<div class="form-group">
+							<label class="form-label" for="allGenres">Genre</label>
+							<select id="allGenres" value.bind="xgenre">
+								<option repeat.for="xelem of allGenres" model.bind="xelem">${xelem.display}</option>
+							</select>
+						</div>
+						<siglename-bar></siglename-bar>
+						<command-bar></command-bar>
+					</form>
+				</td>
+				<td if.bind="canHaveChildren">&nbsp;&nbsp;</td>
+				<td style="vertical-align:top" if.bind="canHaveChildren">
+					<h3>Groupes dépendants</h3>
+					<table>
+						<tr style="vertical-alig:top">
+							<td style="vertical-align:top" if.bind="hasCandidates">
+								<h3>Disponibles</h3>
+								<select id="leftgroupes" multiple value.bind="selectedLeft" size="8">
+									<option repeat.for="pers of leftgroupes" model.bind="pers">${pers.text}</option>
+								</select>
+								<a class="btn btn-primary" click.delegate="add_children()" href="#" show.bind="canAddChildren">
+									<i class="fa fa-plus fa-fw"></i>Ajouter
+								</a>
+							</td>
+							<td>&nbsp;&nbsp;</td>
+							<td style="vertical-align:top" if.bind="hasChildren">
+								<h3>Actuels</h3>
+								<select id="rightgroupes" multiple value.bind="selectedRight" size="8">
+									<option repeat.for="xpers of rightgroupes" model.bind="xpers">${xpers.text}</option>
+								</select>
+								<a class="btn btn-danger" click.delegate="remove_children()" href="#" show.bind="canRemoveChildren">
+									<i class="fa fa-trash fa-fw"></i>Enlever
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</template>

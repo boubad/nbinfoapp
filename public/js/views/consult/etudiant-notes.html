@@ -1,0 +1,146 @@
+<template>
+  <div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align:center">
+            <table>
+              <tr>
+                <td style="text-align:center">
+                  <div if.bind="hasEtudiantUrl">
+                    <img src.bind="etudiantUrl" height="128">
+                    </img>
+                  </div>
+                </td>
+                <td style="text-align:center">
+                  <h2>${fullname}</h2>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:center">
+            <a route-href="route: etud; params.bind: { id: current_etudiantid }">
+              <i class="fa fa-user fa-fw"></i>Infos</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:center">
+            <table>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label class="form-label" for="departements">Dép.</label>
+                    <select id="departements" value.bind="xdepartement">
+                      <option repeat.for="depelem of xdepartements" model.bind="depelem">${depelem.text}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label class="form-label" for="annees">Année</label>
+                    <select id="annees" value.bind="xannee">
+                      <option repeat.for="anelem of xannees" model.bind="anelem">${anelem.text}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label class="form-label" for="semestres">Sem.</label>
+                    <select id="semestres" value.bind="xsemestre">
+                      <option repeat.for="semelem of xsemestres" model.bind="semelem">${semelem.text}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-alig:center">
+            <h3>Notes/Unités</h3>
+            <table id="link-table">
+              <tr>
+                <th>Unité</th>
+                <th>Note</th>
+                <th>Coefficient</th>
+              </tr>
+              <tr repeat.for="evt1 of unitesNotes">
+                <td>
+                  ${evt1.uniteSigle}
+                </td>
+                <td>
+                  ${evt1.noteString}
+                </td>
+                <td>
+                  ${evt1.coefficientString}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-alig:center">
+            <h3>Notes/Matières</h3>
+            <table id="link-table">
+              <tr>
+                <th>Matière</th>
+                <th>Unité</th>
+                <th>Note</th>
+                <th>Coefficient</th>
+              </tr>
+              <tr repeat.for="evt2 of matieresNotes">
+                <td>
+                  ${evt2.matiereSigle}
+                </td>
+                <td>
+                  ${evt2.uniteSigle}
+                </td>
+                <td>
+                  ${evt2.noteString}
+                </td>
+                <td>
+                  ${evt2.coefficientString}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <h3>Détails notes</h3>
+          <td style="text-align:center">
+            <table id="link-table">
+              <tr>
+                <th>Date</th>
+                <th>Matiere</th>
+                <th>Devoir</th>
+                <th>note</th>
+                <th>Observations</th>
+              </tr>
+              <tr repeat.for="evt3 of evts">
+                <td>
+                  ${evt3.dateString}
+                </td>
+                <td>
+                  ${evt3.matiereSigle}
+                </td>
+                <td>
+                  <a route-href="route: grpevt; params.bind: { id: evt3.groupeeventid }">${evt3.groupeEventName}
+                  </a>
+                </td>
+                <td>
+                  ${evt3.note}
+                </td>
+                <td>
+                  ${evt3.description}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

@@ -1,0 +1,18 @@
+<template>
+	<table if.bind="is_connected">
+		<tr>
+			<td>&nbsp;&nbsp</td>
+			<td>${fullname}</td>
+			<td>&nbsp;&nbsp;</td>
+			<td if.bind="has_url">
+				<a href="#" click.delegate="logout()">
+					<img src.bind="url" height="48" />
+				</a>
+			</td>
+			<td>&nbsp;&nbsp</td>
+			<td>
+				<a href="#" click.delegate="logout()">Déconnecter</a>
+			</td>
+		</tr>
+	</table>
+</template>

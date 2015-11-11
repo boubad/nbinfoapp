@@ -1,0 +1,235 @@
+<template>
+	<div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<sheader-bar></sheader-bar>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<work-bar></work-bar>
+				</td>
+			</tr>
+			<tr if.bind="isEditItem">
+				<td style="text-align:center">
+					<ul class="pagination">
+						<li show.bind="isNotEditMode">
+							<a class="btn btn-primary" click.delegate="edit_mode()" href="#">
+								<i class="fa fa-pencil fa-fw"></i>Edition
+							</a>
+						</li>
+						<li show.bind="isNotEvtMode">
+							<a class="btn btn-primary" href="#" click.delegate="evt_mode()">
+								<i class="fa fa-user-times fa-fw"></i>Evènements</a>
+						</li>
+						<li show.bind="isNotNoteMode">
+							<a class="btn btn-primary" href="#" click.delegate="note_mode()">
+								<i class="fa fa-signal fa-fw"></i>Notes</a>
+						</li>
+						<li show.bind="noteMode">
+							<a class="btn btn-primary" href="#" click.delegate="saveNotes()">
+								<i class="fa fa-save fa-fw"></i>Enregistrer notes</a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<table if.bind="editMode">
+			<tbody>
+				<tr>
+					<td style="vertical-align:top" if.bind="hasItems">
+						<div style="text-align:center">
+							<pagination-bar></pagination-bar>
+						</div>
+						<select value.bind="currentItem" size="16">
+							<option repeat.for="elem of items" model.bind="elem">${elem.text}</option>
+						</select>
+					</td>
+					<td>&nbsp;&nbsp</td>
+					<td style="vertical-align:top" if.bind="canShowForm">
+						<form role="form">
+							<table>
+								<tr>
+									<td>
+										<div class="form-group">
+											<avatar-bar></avatar-bar>
+										</div>
+									</td>
+								</tr>
+								<tr style="vertical-align:top">
+									<td style="vertical-align:top">
+										<div class="form-group">
+											<label class="form-label" for="genre">Genre</label>
+											<select id="genre" value.bind="xgenre">
+												<option repeat.for="xelemx of xgenres" model.bind="xelemx">${xelemx}</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="eventDate">Date</label>
+											<input class="form-control" type="date" id="eventDate" value.bind="eventDate" min.bind="startDate" max.bind="endDate" required></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="name">Nom</label>
+											<input class="form-control" type="text" id="name" value.bind="name" placeholder="Nom" required></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="location">Location</label>
+											<input class="form-control" type="text" id="location" value.bind="location" placeholder="Location"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="description">Description</label>
+											<textarea class="form-control" id="description" value.bind="description"></textarea>
+										</div>
+										<command-bar></command-bar>
+									</td>
+									<td>&nbsp;&nbsp;</td>
+									<td style="vertical-align:top">
+										<div class="form-group">
+											<label class="form-label" for="coef">Coefficient</label>
+											<input class="form-control" type="text" id="coef" value.bind="coefficient" placeholder="Coefficient"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="minnote">Note min</label>
+											<input class="form-control" type="text" id="minnote" value.bind="minnote" placeholder="Note Min"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="maxnote">Note max</label>
+											<input class="form-control" type="text" id="maxnote" value.bind="maxnote" placeholder="Note Max"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="startTime">Heure début</label>
+											<input class="form-control" type="time" id="startTime" value.bind="startTime"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="endTime">Heure fin</label>
+											<input class="form-control" type="time" id="endTime" value.bind="endTime"></input>
+										</div>
+										<div class="form-group">
+											<label class="form-label" for="status">Status</label>
+											<input class="form-control" type="text" id="status" value.bind="status" placeholder="status"></input>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div if.bind="noteMode">
+			<table if.bind="isEditItem" id="link-table">
+				<tr>
+					<th></th>
+					<th></th>
+					<th>Nom de famille</th>
+					<th>Prénom(s)</th>
+					<th>Note</th>
+					<th>Observations</th>
+				</tr>
+				<tr repeat.for="note of allNotes">
+					<td>
+						<div if.bind="note.has_url">
+							<img src.bind="note.url" height="32"></img>
+						</div>
+					</td>
+					<td>
+						<input type="checkbox" checked.bind="note.selected" />
+					</td>
+					<td>
+						<a route-href="route: etud; params.bind: { id: note.etudiantid }">${note.lastname}</a>
+					</td>
+					<td>${note.firstname}</td>
+					<td>
+						<input class="form-control" type="text" value.bind="note.note"></input>
+					</td>
+					<td>
+						<input class="form-control" type="text" value.bind="note.description"></input>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- -->
+		<div if.bind="evtMode">
+			<table if.bind="isEditItem">
+				<tbody>
+					<tr>
+						<td>
+							<div class="form-group">
+								<label class="form-label" for="etudevtgenre">Genre</label>
+								<select id="etudevtgenre" value.bind="etudEvtGenre">
+									<option value='ABS'>Absence</option>
+									<option value='RET'>Retard</option>
+									<option value='MSC'>Autre</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<div class="btn-group">
+								<a class="btn btn-primary" click.delegate="saveEtudEvents()" href="#" show.bind="canSaveEtudEvents">
+									<i class="fa fa-save fa-fw"></i>Enregistrer
+								</a>
+								<a class="btn btn-danger" click.delegate="removeEtudEvents()" href="#" show.bind="canRemoveEtudEvents">
+									<i class="fa fa-trash-o fa-fw"></i>Supprimer
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table id="link-table">
+								<tr>
+									<th></th>
+									<th></th>
+									<th>Nom de famille</th>
+									<th>Prénom(s)</th>
+								</tr>
+								<tr repeat.for="aff of etudAffectations">
+									<td>
+										<div if.bind="aff.has_url">
+											<img src.bind="aff.url" height="32"></img>
+										</div>
+									</td>
+									<td>
+										<input type="checkbox" checked.bind="aff.selected" />
+									</td>
+									<td>
+										<a route-href="route: etud; params.bind: { id: aff.etudiantid }">${aff.lastname}</a>
+									</td>
+									<td>${aff.firstname}</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table id="link-table">
+								<tr>
+									<th></th>
+									<th></th>
+									<th>Nom de famille</th>
+									<th>Prénom(s)</th>
+									<th>Genre</th>
+								</tr>
+								<tr repeat.for="evt of etudEvents">
+									<td>
+										<div if.bind="evt.has_url">
+											<img src.bind="evt.url" height="32"></img>
+										</div>
+									</td>
+									<td>
+										<input type="checkbox" checked.bind="evt.selected" />
+									</td>
+									<td>
+										<a route-href="route: etud; params.bind: { id: evt.etudiantid }">${evt.lastname}</a>
+									</td>
+									<td>${evt.firstname}</td>
+									<td>${evt.genre}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>

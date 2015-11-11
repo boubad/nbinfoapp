@@ -1,0 +1,15 @@
+<template>
+  <table if.bind="is_connected">
+    <tr>
+      <td>
+        <div class="form-group">
+          <label class="form-label" for="departements">Dép.</label>
+          <select id="departements" value.bind="departement">
+						<option>Departement...</option>
+            <option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+          </select>
+        </div>
+      </td>
+    </tr>
+  </table>
+</template>

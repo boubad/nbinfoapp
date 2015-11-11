@@ -1,0 +1,262 @@
+<template>
+	<div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<table>
+						<tr>
+							<td style="text-align:center">
+								<div if.bind="hasEtudiantUrl">
+									<img src.bind="etudiantUrl" height="128"></img>
+								</div>
+							</td>
+							<td style="text-align:center">
+								<h2>${fullname}</h2>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<ul class="pagination">
+						<li show.bind="canInfoMode">
+							<a class="btn btn-primary" click.delegate="set_info()" href="#">
+                <i class="fa fa-user fa-fw"></i>Infos
+              </a>
+						</li>
+						<li show.bind="canEvtMode">
+							<a class="btn btn-primary" href="#" click.delegate="set_evts()">
+                <i class="fa fa-user-times fa-fw"></i>Evènements</a>
+						</li>
+						<li show.bind="canNoteMode">
+							<a class="btn btn-primary" href="#" click.delegate="set_note()">
+                <i class="fa fa-signal fa-fw"></i>Notes</a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<table>
+						<tr>
+							<td>
+								<div class="form-group">
+									<label class="form-label" for="annees">Année</label>
+									<select id="annees" value.bind="xannee">
+										<option repeat.for="anelem of xannees" model.bind="anelem">${anelem.text}</option>
+									</select>
+								</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<label class="form-label" for="semestres">Sem.</label>
+									<select id="semestres" value.bind="xsemestre">
+										<option repeat.for="semelem of xsemestres" model.bind="semelem">${semelem.text}</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr if.bind="infoMode">
+				<td>
+					<table>
+						<tr>
+							<td style="vertical-align:top">
+								<div class="form-group">
+									<label class="form-label" for="sexe">Sexe</label>
+									<input class="form-control" type="text" id="sexe" value.bind="sexe" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="username">Identifiant</label>
+									<input class="form-control" type="text" id="username" value.bind="username" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="lastname">Nom de famille</label>
+									<input class="form-control" type="text" id="lastname" value.bind="lastname" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="firstname">Prénom(s)</label>
+									<input class="form-control" type="text" id="firstname" value.bind="firstname" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="email">Courriel</label>
+									<input class="form-control" type="email" id="email" value.bind="email" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="phone">Téléphone</label>
+									<input class="form-control" type="tel" id="phone" value.bind="phone" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="description">Description</label>
+									<textarea class="form-control" id="description" readonly.bind="isReadOnly" value.bind="description" readonly></textarea>
+								</div>
+							</td>
+							<td>&nbsp;&nbsp;</td>
+							<td style="vertical-align:top">
+								<div class="form-group">
+									<label class="form-label" for="birthDate">Date de naissance</label>
+									<input class="form-control" type="date" id="birthDate" value.bind="birthDate" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="dossier">Dossier</label>
+									<input class="form-control" type="text" id="dossier" value.bind="dossier" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="etablissement">Etablissement</label>
+									<input class="form-control" type="text" id="etablissement" value.bind="etablissement" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="ville">Ville</label>
+									<input class="form-control" type="text" id="ville" value.bind="ville" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="seriebac">Série bac</label>
+									<input class="form-control" type="text" id="seriebac" value.bind="serieBac" placeholder="Série bac" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="optionbac">Option bac</label>
+									<input class="form-control" type="text" id="optionbac" value.bind="optionBac" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="mentionbac">Mention bac</label>
+									<input class="form-control" type="text" id="mentionbac" value.bind="mentionBac" readonly></input>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="sup">Etudes supérieures</label>
+									<input class="form-control" type="text" id="sup" value.bind="etudesSuperieures" readonly></input>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr if.bind="evtMode" style="vertical-align:top">
+				<td style="text-align:center">
+					<h3>Evènements</h3>
+					<table>
+						<tr>
+							<td if.bind="has_sumEvts">
+								<h4>Statistiques</h4>
+								<table id="link-table">
+									<tr>
+										<th>Genre</th>
+										<th>Nb.</th>
+										<th>Observations</th>
+									</tr>
+									<tr repeat.for="evs of sumEvts">
+										<td>${evs.name}</td>
+										<td>${evs.count}</td>
+										<td>${evs.description}</td>
+									</tr>
+								</table>
+							</td>
+							<td>&nbsp;&nbsp;</td>
+							<td if.bind="has_allEvts">
+								<h4>Détails</h4>
+								<table id="link-table">
+									<tr>
+										<th>Date</th>
+										<th>Genre</th>
+										<th>Matiere</th>
+										<th>Devoir</th>
+										<th>Observations</th>
+									</tr>
+									<tr repeat.for="evt of allEvts">
+										<td>${evt.dateString}</td>
+										<td>${evt.genre}</td>
+										<td>${evt.matiereSigle}</td>
+										<td>
+											<a route-href="route: grpevt; params.bind: { id: evt.groupeeventid }">${evt.groupeEventName}</a>
+										</td>
+										<td>${evt.description}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr if.bind="noteMode" style="vertical-align:top">
+				<td style="text-align:center">
+					<h3>Notes</h3>
+					<table>
+						<tr if.bind="has_totalNotes">
+							<td>
+								<h4>Moyennes finales</h4>
+								<table id="link-table">
+									<tr>
+										<th>Année</th>
+										<th>Moyenne</th>
+										<th>Coefficient</th>
+									</tr>
+									<tr repeat.for="nx of totalNotes">
+										<td>${nx.name}</td>
+										<td>${nx.note}</td>
+										<td>${nx.coefficient}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr if.bind="has_unitesNotes">
+							<td>
+								<h4>Moyennes Unités</h4>
+								<table id="link-table">
+									<tr>
+										<th>Unité</th>
+										<th>Moyenne</th>
+										<th>Coefficient</th>
+									</tr>
+									<tr repeat.for="ny of unitesNotes">
+										<td>${ny.name}</td>
+										<td>${ny.note}</td>
+										<td>${ny.coefficient}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr if.bind="has_matieresNotes">
+							<td>
+								<h4>Moyennes Matières</h4>
+								<table id="link-table">
+									<tr>
+										<th>Matière</th>
+										<th>Moyenne</th>
+										<th>Coefficient</th>
+									</tr>
+									<tr repeat.for="nz of matieresNotes">
+										<td>${nz.name}</td>
+										<td>${nz.note}</td>
+										<td>${nz.coefficient}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr if.bind="has_devoirsNotes">
+							<td>
+								<h4>Détail notes</h4>
+								<table id="link-table">
+									<tr>
+										<th>Devoir</th>
+										<th>Note</th>
+										<th>Coefficient</th>
+										<th>Observations</th>
+									</tr>
+									<tr repeat.for="nt of matieresNotes">
+										<td>${nt.name}</td>
+										<td>${nt.note}</td>
+										<td>${nt.coefficient}</td>
+										<td>${nt.description}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</template>

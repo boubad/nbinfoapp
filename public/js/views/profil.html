@@ -1,0 +1,117 @@
+<template>
+	<connect-bar info.bind="userInfo"></connect-bar>
+  <div if.bind="is_connected">
+    <table>
+      <tr style="text-align:center">
+        <td>&nbsp;&nbsp;</td>
+        <td style="text-align:center">
+          <ul class="pagination">
+            <li if.bind="canProfil">
+              <a class="btn btn-primary" click.delegate="set_profil()" href="#">
+                <i class="fa fa-user fa-fw"></i>Profil
+              </a>
+            </li>
+            <li if.bind="canPassword">
+              <a class="btn btn-primary" click.delegate="set_password()" href="#">
+                <i class="fa fa-lock fa-fw"></i>Mot de passe
+              </a>
+            </li>
+            <li if.bind="canAvatar">
+              <a class="btn btn-primary" click.delegate="set_avatar()" href="#">
+                <i class="fa fa-image fa-fw"></i>Avatar
+              </a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr if.bind="hasErrorMessage" class="text-danger"  style="text-align:center">
+        <td style="text-align:center">
+          <h3>${errorMessage}</h3>
+        </td>
+      </tr>
+      <tr if.bind="hasInfoMessage" class="text-success"  style="text-align:center">
+        <td style="text-align:center">
+          <h3>${infoMessage}</h3>
+        </td>
+      </tr>
+      <tr if.bind="profilMode"  style="text-align:center">
+        <td>&nbsp;&nbsp;</td>
+        <td style="text-align:center">
+          <h3>Profil utilisateur</h3>
+          <form role="form">
+            <div class="form-group">
+              <label class="form-label" for="lastname">Nom de famille</label>
+              <input type="text" class="form-control" id="lastname" value.bind="lastname" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="firstname">Prénom(s)</label>
+              <input type="text" class="form-control" id="firstname" value.bind="firstname" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Courriel</label>
+              <input type="email" class="form-control" id="email" value.bind="email" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Téléphone</label>
+              <input type="text" class="form-control" id="phone" value.bind="phone" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="description">Remarques</label>
+              <textarea class="form-control" id="description" value.bind="description"></textarea>
+            </div>
+            <div class="btn-group">
+              <a class="btn btn-primary" click.delegate="saveData()" href="#" show.bind="canSaveData">
+                <i class="fa fa-save fa-fw"></i>Modifier
+              </a>
+            </div>
+          </form>
+        </td>
+      </tr>
+      <tr if.bind="avatarMode"  style="text-align:center">
+        <td>&nbsp;&nbsp;</td>
+        <td style="text-align:center">
+          <h2>Avatar</h2>
+          <div if.bind="hasOldUrl">
+            <img src.bind="oldUrl" height="128"></img>
+            <a class="btn btn-danger"  click.delegate="remove()" href="#" show.bind="canRemove">
+              <i class="fa fa-trash-o fa-fw"></i>Supprimer
+            </a>
+          </div>
+          <form role="form">
+            <div class="form-group">
+              <i class="fa fa-user fa-fw"></i>
+              <input type="file" id="fileToUpload" accept="image/png, image/jpeg" change.delegate="fileChanged($event)"></input>
+            </div>
+          </form>
+          <div if.bind="hasUrl">
+            <img src.bind="url" height="128"></img>
+            <a class="btn btn-primary"  click.delegate="save()" href="#" show.bind="canSave">
+              <i class="fa fa-save fa-fw"></i>Enregistrer
+            </a>
+          </div>
+        </td>
+      </tr>
+      <tr if.bind="passwordMode"  style="text-align:center">
+        <td>&nbsp;&nbsp;</td>
+        <td style="text-align:center">
+          <h2>Mot de passe</h2>
+          <form role="form">
+            <div class="form-group">
+              <label class="form-label" for="newpwd">Nouveau mot de passe</label>
+              <input type="password" class="form-control" id="newpwd" value.bind="newPassword" placeholder="Nouveau mot de passe" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="confirmpwd">Confirmation nouveau mot de passe</label>
+              <input type="password" class="form-control" id="confirmpwd" value.bind="confirmPassword" placeholder="Confirmation mot de passe" />
+            </div>
+            <div class="btn-group">
+              <a class="btn btn-primary"  click.delegate="changePwd()" href="#" show.bind="canChangePwd">
+                <i class="fa fa-save fa-fw"></i>Changer mot de passe
+              </a>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

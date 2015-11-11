@@ -1,0 +1,52 @@
+<template>
+  <div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+    <table>
+      <tr>
+        <td style="text-align:center">
+          <sheader-bar></sheader-bar>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:center">
+          <work-bar></work-bar>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <pagination-bar></pagination-bar>
+        </td>
+      </tr>
+      <tr if.bind="hasItems">
+        <td>
+          <table id="link-table">
+            <tr>
+              <th></th>
+              <th>Date</th>
+              <th>Genre</th>
+              <th>Nom</th>
+              <th>Matière</th>
+              <th>Groupe</th>
+              <th>Observations</th>
+            </tr>
+            <tr repeat.for="evt of items">
+              <td>
+                <div if.bind="evt.has_url">
+                  <img src.bind="evt.url" height="32"></img>
+                </div>
+              </td>
+              <td>${evt.dateString}</td>
+              <td>${evt.genre}</td>
+              <td>
+                <a route-href="route: grpevt; params.bind: { id: evt.id }">${evt.name}</a>
+              </td>
+              <td>${evt.matiereName}</td>
+              <td>${evt.groupeName}</td>
+              <td>${evt.description}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

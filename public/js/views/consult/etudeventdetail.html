@@ -1,0 +1,76 @@
+<template>
+  <div class="container" if.bind="is_connected">
+		<connect-bar info.bind="userInfo"></connect-bar>
+    <table>
+      <tr>
+        <td>
+          <sheader-bar></sheader-bar>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form role="form">
+            <div class="form-group">
+              <label class="form-label" for="departemnt">Département</label>
+              <input class="form-control" type="text" id="departement" value.bind="departementName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="annee">Année universitaire</label>
+              <input class="form-control" type="text" id="annee" value.bind="anneeName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="semestre">Semestre</label>
+              <input class="form-control" type="text" id="semestre" value.bind="semestreName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="unite">Unité</label>
+              <input class="form-control" type="text" id="unite" value.bind="uniteName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="matiere">Matière</label>
+              <input class="form-control" type="tel" id="matiere" value.bind="matiereName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="groupe">Groupe</label>
+              <input class="form-control" type="tel" id="groupe" value.bind="groupeName" readonly></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="devoir">Contrôle</label>
+              <input class="form-control" type="text" id="devoir" value.bind="groupeEventName" readonly></input>
+            </div>
+          </form>
+        </td>
+				<td>&nbsp;&nbsp;</td>
+        <td>
+          <form role="form">
+            <div class="form-group">
+              <label class="form-label" for="eventDate">Date</label>
+              <input class="form-control" type="date" id="eventDate" value.bind="eventDate" disabled.bind="cannotEdit" min.bind="minDate" max.bind="maxDate" required></input>
+            </div>
+            <div class="form-group" if.bind="is_event">
+              <label class="form-label" for="etudevtgenre">Genre</label>
+              <select id="etudevtgenre" value.bind="genre" disabled.bind="cannotEdit">
+                <option value='ABS'>Absence</option>
+                <option value='RET'>Retard</option>
+                <option value='MSC'>Autre</option>
+              </select>
+            </div>
+            <div class="form-group" if.bind="is_note">
+              <label class="form-label" for="note">Note</label>
+              <input class="form-control" type="text" id="note" value.bind="note" disabled.bind="cannotEdit"></input>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="description">observations</label>
+              <textarea class="form-control" id="description" value.bind="observations" disabled.bind="cannotEdit"></textarea>
+            </div>
+            <div class="btn-group" show.bind="canSave">
+              <a class="btn btn-primary"  click.delegate="save()" href="#">
+                <i class="fa fa-save fa-fw"></i>Modifier
+              </a>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>

@@ -1,0 +1,26 @@
+<template>
+  <table>
+    <tr>
+      <td if.bind="canAdd">
+        <a class="btn btn-primary"   click.delegate="addNew()" href="#">
+          <i class="fa fa-plus fa-fw"></i>Nouveau
+        </a>
+      </td>
+      <td if.bind="canCancel">
+        <a class="btn btn-primary"  click.delegate="cancel()" href="#">
+          <i class="fa fa-reply fa-fw"></i>Annuler
+        </a>
+      </td>
+      <td if.bind="canSave">
+        <a class="btn btn-primary"  click.delegate="save()" href="#">
+          <i class="fa fa-save fa-fw"></i>Enregistrer
+        </a>
+      </td>
+      <td if.bind="canRemove">
+        <a class="btn btn-danger"  click.delegate="remove()" href="#">
+          <i class="fa fa-trash-o fa-fw"></i>Supprimer
+        </a>
+      </td>
+    </tr>
+  </table>
+</template>

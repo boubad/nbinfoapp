@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>InfoApp</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/fontawesome/css/font-awesome.min.css">
+	<link href="stylesheets/styles.css" rel="stylesheet" />
+</head>
+
+<body aurelia-app='js/views/main'>
+	<div class="splash">
+		<div class="message">InfoApp starting...</div>
+		<i class="fa fa-spinner fa-spin"></i>
+	</div>
+	<script src="javascripts/lie/lie.polyfill.min.js"></script>
+	<script src="javascripts/pouchdb/pouchdb-5.1.0.min.js"></script>
+	<script src="javascripts/pouchdb/pouchdb.find.js"></script>
+	<script src='javascripts/papaparse/papaparse.js'></script>
+	<script src="javascripts/core-js/client/core.js"></script>
+	<script src="javascripts/webcomponentsjs/webcomponents.js"></script>
+	<script src="javascripts/requirejs/require.js"></script>
+	<script>
+		var origin = window.location.origin;
+      var pathname = window.location.pathname;
+      var baseUrl = origin + pathname.toLowerCase().replace("index.html", "");
+      require.config({
+        baseUrl: baseUrl,
+        paths: {
+            aurelia: baseUrl + "javascripts/aurelia",
+			 pouchdb: baseUrl + "javascripts/pouchdb/pouchdb-5.1.0.min",
+			 pouchdbfind: baseUrl + "javascripts/pouchdb/pouchdb.find",
+			 papaparse: baseUrl + "javascripts/papaparse/papaparse",
+			webcomponentsjs: baseUrl + "javascripts/webcomponentsjs",
+            views: baseUrl + "js/views"
+        },
+        shim: {
+            "pouchdb": {
+                exports: "PouchDB"
+            },
+			"pouchdbfind": {
+			deps: ['pouchdb']
+		},
+			"papaparse": {
+			exports: "Papa"
+		}
+        }
+      });
+	  require(['pouchdbfind'],function(pd){
+		  require(["aurelia/aurelia-bundle-latest"], function(au) {
+        require(["aurelia-bundle-manifest"], function (abm) {
+            require(["aurelia-bootstrapper"], function (b) {
+                // alert("loaded");
+            });
+        })
+    });
+	  });
+	</script>
+</body>
+
+</html>

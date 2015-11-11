@@ -1,0 +1,22 @@
+<template>
+  <table>
+    <tr>
+      <td>
+        <div class="form-group">
+          <label class="form-label" for="departements">Dep.</label>
+          <select id="departements" value.bind="departement">
+            <option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <div class="form-group">
+          <label class="form-label" for="unites">Unité</label>
+          <select id="unites" value.bind="unite">
+            <option repeat.for="unelem of unites" model.bind="unelem">${unelem.text}</option>
+          </select>
+        </div>
+      </td>
+    </tr>
+  </table>
+</template>

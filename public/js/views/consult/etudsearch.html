@@ -1,0 +1,141 @@
+<template>
+	<table if.bind="is_connected">
+		<tr>
+			<td style="vertical-align:top">
+				<connect-bar info.bind="userInfo"></connect-bar>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">
+				<form role="form">
+					<div class="form-group">
+						<label class="form-label" for="departements">Dép.</label>
+						<select id="departements" value.bind="departement">
+							<option>Dep?...</option>
+							<option repeat.for="depelem of departements" model.bind="depelem">${depelem.text}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="groupes">Groupe</label>
+						<select id="groupes" value.bind="groupe">
+							<option>Groupe?...</option>
+							<option repeat.for="grpelem of groupes" model.bind="grpelem">${grpelem.text}</option>
+						</select>
+					</div>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">
+				<a class="btn btn-primary" click.delegate="refreshAll()" href="#">
+					<i class="fa fa-search fa-fw"></i>Rechercher
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">
+				<form role="form">
+					<div class="form-group">
+						<label class="form-label" for="lastname">Nom de famille</label>
+						<input class="form-control" type="text" id="lastname" value.bind="lastname" placeholder="Nom de famille" disabled.bind="isReadOnly"
+						readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="firstname">Prénom(s)</label>
+						<input class="form-control" type="text" id="firstname" value.bind="firstname" placeholder="Prénom(s)" disabled.bind="isReadOnly"
+						readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Sexe</label>
+						<label class="radio-inline">
+							<input type="radio" name="optsexe" value.bind="sexe">MASCULIN</label>
+						<label class="radio-inline">
+							<input type="radio" name="optsexe" value.bind="sexe">FEMININ</label>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="birthDate">Date de naissance</label>
+						<input class="form-control" type="date" id="birthDate" value.bind="birthDate"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="dossier">Dossier</label>
+						<input class="form-control" type="text" id="dossier" value.bind="dossier" placeholder="Dossier" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="etablissement">Etablissement</label>
+						<input class="form-control" type="text" id="etablissement" value.bind="etablissement" placeholder="Etablissement" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="ville">Ville</label>
+						<input class="form-control" type="text" id="ville" value.bind="ville" placeholder="Ville" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="seriebac">Série bac</label>
+						<input class="form-control" type="text" id="seriebac" value.bind="serieBac" placeholder="Série bac" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="optionbac">Option bac</label>
+						<input class="form-control" type="text" id="optionbac" value.bind="optionBac" placeholder="Option bac" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="mentionbac">Mention bac</label>
+						<input class="form-control" type="text" id="mentionbac" value.bind="mentionBac" placeholder="Mention bac" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="sup">Etudes supérieures</label>
+						<input class="form-control" type="text" id="sup" value.bind="etudesSuperieures" placeholder="Etudes supérieures" readonly.bind="isReadOnly"></input>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="apb">APB</label>
+						<input class="form-control" type="text" id="apb" value.bind="apb" placeholder="APB" readonly.bind="isReadOnly"></input>
+					</div>
+				</form>
+			</td>
+			<td style="vertical-align:top">&nbsp;&nbsp;</td>
+			<td style="vertical-align:top">
+				<div if.bind="hasItems">
+					<div if.bind="hasPages">
+						<ul class="pagination">
+							<li show.bind="canPrevPage">
+								<a href="#" click.delegate="firstPage()">
+									<i class="fa fa-fast-backward fa-fw"></i>Début</a>
+							</li>
+							<li show.bind="canPrevPage">
+								<a href="#" click.delegate="prevPage()">
+									<i class="fa fa-step-backward fa-fw"></i>Préc.</a>
+							</li>
+							<li show.bind="canNextPage">
+								<a href="#" click.delegate="nextPage()">
+									<i class="fa fa-step-forward fa-fw"></i>Suivant</a>
+							</li>
+							<li show.bind="canNextPage">
+								<a href="#" click.delegate="lastPage()">
+									<i class="fa fa-fast-forward fa-fw"></i>Fin</a>
+							</li>
+						</ul>
+						<div class="text-success">
+							<strong>${pageStatus}</strong>
+						</div>
+					</div>
+					<table id="link-table">
+						<tr>
+							<th></th>
+							<th>Nom de famille</th>
+							<th>Prénom(s)</th>
+						</tr>
+						<tr repeat.for="evt of items">
+							<td>
+								<div if.bind="evt.has_url">
+									<img src.bind="evt.url" height="32"></img>
+								</div>
+							</td>
+							<td>
+								<a route-href="route: etud; params.bind: { id: evt.id }">${evt.lastname}</a>
+							</td>
+							<td>${evt.firstname}</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+</template>

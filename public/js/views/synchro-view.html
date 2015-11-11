@@ -1,0 +1,86 @@
+<template>
+	<table if.bind="is_connected">
+		<tr>
+			<td style="text-align:center">
+				<connect-bar info.bind="userInfo"></connect-bar>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">
+				<sheader-bar></sheader-bar>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">
+				<table>
+					<tr>
+						<td style="text-align:center">
+							<div class="form-group">
+								<label class="form-label" for="servers">Serveurs distants</label>
+								<select id="servers" value.bind="currentServer">
+									<option repeat.for="serv of servers" value.bind="serv">${serv}</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center">
+							<a class="btn btn-danger" click.delegate="removeServer()" href="#" show.bind="canRemoveServer">
+								<i class="fa fa-remove fa-fw"></i>Enlever serveur distant
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:center">
+							<div>
+								<div class="form-group">
+									<label class="form-label" for="candidate">Url serveur</label>
+									<input class="form-control" type="text" id="candidate" value.bind="candidateServer" placeholder="URL serveur"></input>
+								</div>
+								<a class="btn btn-primary" click.delegate="addServer()" href="#" show.bind="canAddServer">
+									<i class="fa fa-plus fa-fw"></i>Ajouter
+								</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td style="text-align:center">&nbsp;&nbsp;</td>
+			<td style="vertical-align:top">
+				<table>
+					<tr>
+						<td style="text-align:center">
+							<label class="form-label" for="currentServer_im">Serveur distant (IMPORT)</label>
+							<input class="form-control" type="text" id="currentServer_im" value.bind="currentServer" readonly></input>
+						</td>
+					</tr>
+					<tr if.bind="canPerform">
+						<td style="text-align:center">
+							<div class="btn-group">
+								<a class="btn btn-primary" href="#" show.bind="canImport" click.delegate="import()"><i class="fa fa-download fa-fw"></i>Importer</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td style="text-align:center">&nbsp;&nbsp;</td>
+			<td style="vertical-align:top">
+				<table>
+					<tr>
+						<td style="text-align:center">
+							<label class="form-label" for="currentServer_out">Serveur distant (EXPORT)</label>
+							<input class="form-control" type="text" id="currentServer_out" value.bind="currentServer" readonly></input>
+						</td>
+					</tr>
+					<tr if.bind="canPerform">
+						<td style="text-align:center">
+							<div class="btn-group">
+								<a class="btn btn-primary" href="#" show.bind="canExport" click.delegate="export()"><i class="fa fa-upload fa-fw"></i>Exporter</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</template>

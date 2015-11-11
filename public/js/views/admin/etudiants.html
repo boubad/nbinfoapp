@@ -1,0 +1,83 @@
+<template>
+	<connect-bar info.bind="userInfo"></connect-bar>
+	<div class="container">
+		<table>
+			<tr>
+				<td style="text-align:center">
+					<sheader-bar></sheader-bar>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+					<depart-bar></depart-bar>
+				</td>
+			</tr>
+			<tr if.bind="isEditable">
+				<td style="text-align:center">
+					<import-bar></import-bar>
+				</td>
+			</tr>
+			<tr if.bind="canShowForm">
+				<td style="vertical-align:top">
+					<elements-bar></elements-bar>
+				</td>
+				<td>&nbsp;&nbsp;</td>
+				<td style="vertical-align:top">
+					<form role="form">
+						<avatar-bar></avatar-bar>
+						<person-bar></person-bar>
+						<command-bar></command-bar>
+					</form>
+				</td>
+				<td>&nbsp;&nbsp;</td>
+				<td style="vertical-align:top">
+					<form role="form">
+						<div class="form-group">
+							<label class="form-label">Sexe</label>
+							<label class="radio-inline">
+								<input type="radio" name="optsexe" value.bind="sexe">MASCULIN</label>
+							<label class="radio-inline">
+								<input type="radio" name="optsexe" value.bind="sexe">FEMININ</label>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="birthDate">Date de naissance</label>
+							<input class="form-control" type="date" id="birthDate" value.bind="birthDate"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="dossier">Dossier</label>
+							<input class="form-control" type="text" id="dossier" value.bind="dossier" placeholder="Dossier" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="etablissement">Etablissement</label>
+							<input class="form-control" type="text" id="etablissement" value.bind="etablissement" placeholder="Etablissement" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ville">Ville</label>
+							<input class="form-control" type="text" id="ville" value.bind="ville" placeholder="Ville" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="seriebac">Série bac</label>
+							<input class="form-control" type="text" id="seriebac" value.bind="serieBac" placeholder="Série bac" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="optionbac">Option bac</label>
+							<input class="form-control" type="text" id="optionbac" value.bind="optionBac" placeholder="Option bac" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="mentionbac">Mention bac</label>
+							<input class="form-control" type="text" id="mentionbac" value.bind="mentionBac" placeholder="Mention bac" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="sup">Etudes supérieures</label>
+							<input class="form-control" type="text" id="sup" value.bind="etudesSuperieures" placeholder="Etudes supérieures" readonly.bind="isReadOnly"></input>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="apb">APB</label>
+							<input class="form-control" type="text" id="apb" value.bind="apb" placeholder="APB" readonly.bind="isReadOnly"></input>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</template>

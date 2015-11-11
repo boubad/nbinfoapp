@@ -43,9 +43,9 @@ var path = {
 gulp.task('serve', function(done) {
   browserSync({
     open: false,
-    port: 9000,
+    port: 4000,
     server: {
-      baseDir: ['.'],
+      baseDir: ['./public'],
       middleware: function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         next();

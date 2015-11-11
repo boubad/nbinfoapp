@@ -1,0 +1,45 @@
+<template>
+	<table>
+		<tr if:bind="canShowForm">
+			<td style="text-align:center">
+				<a class="btn btn-primary" click.delegate="refreshAll()" href="#">
+					<i class="fa fa-refresh fa-fw"></i>Rafraîchir
+				</a>
+			</td>
+		</tr>
+		<tr if.bind="hasPages">
+			<td style="text-align:center">
+				<ul class="pagination">
+					<li show.bind="canPrevPage">
+						<a href="#" click.delegate="firstPage()">
+							<i class="fa fa-fast-backward fa-fw"></i>Début</a>
+					</li>
+					<li show.bind="canPrevPage">
+						<a href="#" click.delegate="prevPage()">
+							<i class="fa fa-step-backward fa-fw"></i>Préc.</a>
+					</li>
+					<li show.bind="canNextPage">
+						<a href="#" click.delegate="nextPage()">
+							<i class="fa fa-step-forward fa-fw"></i>Suivant</a>
+					</li>
+					<li show.bind="canNextPage">
+						<a href="#" click.delegate="lastPage()">
+							<i class="fa fa-fast-forward fa-fw"></i>Fin</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr if.bind="hasPages">
+			<td class="text-success">
+				<strong>${pageStatus}</strong>
+			</td>
+		</tr>
+		<tr if.bind="hasItems">
+			<td style="text-align:center">
+				<select value.bind="currentItem" size="16">
+					<option repeat.for="elem of items" model.bind="elem">${elem.text}</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</template>

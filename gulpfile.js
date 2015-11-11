@@ -22,7 +22,9 @@ gulp.task('build-ts', function () {
          noExternalResolve: true,
          target: "es5",
          module: "amd",
-         emitDecoratorMetadata: true
+         emitDecoratorMetadata: true,
+				 experimentalDecorators: true,
+         sourceMap: true
     }));
 
     return merge([

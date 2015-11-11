@@ -1,0 +1,18 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.DS_Store": true,
+		"**/*.map":true,
+		"nbproject": true,
+		"node_modules":true,
+		"public/javascripts": true,
+		"public/bower_components":true,
+		"public/stylesheets/bootstrap":true,
+		"public/stylesheets/fontawesome":true,
+		"public/favicon.ico":true,
+		"**/*.js": { "when": "$(basename).ts"}
+	}
+}
